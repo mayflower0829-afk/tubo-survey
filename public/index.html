@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#D97706">
+  <meta name="description" content="乡橙调查——土拨购乡橙项目（三创赛国家级一等奖）市场调查数据的交互式分析平台：频数分析、卡方交叉检验、Cronbach's α 信度、Spearman 秩相关。数据为按方案生成的模拟问卷（已诚实标注）。">
+  <title>乡橙调查 · 市场调查数据交互分析平台</title>
+  <meta property="og:title" content="乡橙调查 · 市场调查数据交互分析平台">
+  <meta property="og:description" content="三创赛国家级一等奖项目「土拨购乡橙」的市场调查数据平台：400 样本、频数/卡方/信度/秩相关全交互验证。">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23D97706'/><text x='50' y='68' font-size='42' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>橙</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="appHeader">
+  <div class="brand">
+    <h1>乡橙调查 <span class="en">TuboSurvey</span></h1>
+    <span class="sub">「土拨购乡橙」市场调查 · 交互式数据分析平台 · 三创赛国家级一等奖项目</span>
+  </div>
+</header>
+
+<nav id="tabnav">
+  <button data-tab="overview" class="active">总览</button>
+  <button data-tab="freq">频数分析</button>
+  <button data-tab="cross">交叉分析</button>
+  <button data-tab="scale">量表与相关</button>
+  <button data-tab="method">方法说明</button>
+</nav>
+
+<main id="main">
+
+  <!-- ========== 总览 ========== -->
+  <section id="tab-overview" class="tab active">
+    <div class="kpis" id="kpiRow"></div>
+    <div class="card">
+      <div class="card-title">样本结构（多点配额抽样）</div>
+      <div id="chartQuota" class="chart"></div>
+      <p class="figcap">4 个年龄组 × 线上/线下 各 50 份，共 400 份——非概率配额抽样，不代表全市人口结构。</p>
+    </div>
+    <div class="card">
+      <div class="card-title">购买用途与关注点分布</div>
+      <div id="chartUse" class="chart"></div>
+    </div>
+    <div class="note">
+      <b>数据诚实声明：</b>本平台数据为按调查方案生成的<b>模拟问卷记录</b>（非真实发放回收的问卷），分布与统计结论已校准至项目《市场调查报告》口径。调查设计（抽样、问卷、访谈与观察安排）为真实的方案内容。详见「方法说明」。
+    </div>
+  </section>
+
+  <!-- ========== 频数分析 ========== -->
+  <section id="tab-freq" class="tab">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">单变量频数分析</div>
+        <select id="freqVar"></select>
+      </div>
+      <div id="chartFreq" class="chart"></div>
+      <div id="freqTable"></div>
+    </div>
+  </section>
+
+  <!-- ========== 交叉分析 ========== -->
+  <section id="tab-cross" class="tab">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">交叉分析与卡方检验</div>
+      </div>
+      <div class="filter-row">
+        <label>行变量 <select id="crossRow"></select></label>
+        <label>列变量 <select id="crossCol"></select></label>
+      </div>
+      <div id="chartCross" class="chart"></div>
+      <div id="chiResult"></div>
+      <div id="crossTable"></div>
+    </div>
+  </section>
+
+  <!-- ========== 量表与相关 ========== -->
+  <section id="tab-scale" class="tab">
+    <div class="card">
+      <div class="card-title">量表内部一致性（Cronbach's α）</div>
+      <div id="alphaTable"></div>
+      <p class="hint">α ≥ 0.7 视为内部一致性可接受。量表题项采用 1-5 Likert 计分。</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Spearman 秩相关热力图</div>
+      <div id="chartSpear" class="chart"></div>
+      <p class="figcap">T=信息信任 · V=感知价格价值 · R=物流风险 · W=购买意愿（各为对应题项均值）</p>
+    </div>
+    <div class="card">
+      <div class="card-title">关联结论</div>
+      <div class="hint" id="spearConclusion"></div>
+    </div>
+  </section>
+
+  <!-- ========== 方法说明 ========== -->
+  <section id="tab-method" class="tab">
+    <div class="card">
+      <div class="card-title">调查设计</div>
+      <div class="hint">
+        <p><b>对象：</b>年满 18 周岁、在成都连续居住满 6 个月、过去 3 个月曾为本人或家庭购买鲜果的消费者；分析单位为个人。</p>
+        <p><b>抽样：</b>多点配额抽样（非概率），年龄四组 × 线上/线下各 50 份，共 400 份；线下覆盖社区、水果零售点与高校周边，线上经社区与生活服务群收集。配额结构不代表全市人口分布，结果不外推至全市。</p>
+        <p><b>配合方法：</b>结构式问卷为主，辅以半结构式访谈（果农与合作社）、现场观察与文献资料。</p>
+        <p><b>商品情境：</b>统一评价 5 斤（2.5kg）阳光一号鲜橙、总价 99 元含配送与简易防护包装的假设方案；99 元为统一评价条件的假设价格。</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">问卷结构</div>
+      <table class="tbl">
+        <thead><tr><th>模块</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>Q1-Q3 消费行为</td><td>水果购买频次、常用渠道、最近一次鲜橙购买用途</td></tr>
+          <tr><td>Q4-Q7 产品需求</td><td>重要属性、5 斤装最高接受总价、包装与配送要求</td></tr>
+          <tr><td>Q8-Q10 原有经验</td><td>阳光一号认知、鲜橙网购经验及遇到的问题</td></tr>
+          <tr><td>量表模块</td><td>信息信任（T1-T3）、感知价格价值（V1-V3）、物流风险（R1-R3）、购买意愿（W1-W3），1-5 Likert</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">数据声明</div>
+      <div class="hint">
+        <p>· 本平台 400 条记录为<b>按调查方案生成的模拟问卷数据</b>，非真实发放回收的问卷；分布与统计结论已校准至《土拨购乡橙_市场调查报告》。生成逻辑固定随机种子，可复现。</p>
+        <p>· 项目历史经营数据（累计销售额约 16.6 万元等）来自三创赛答辩材料口径，与本平台模拟数据属不同资料，不能相互推断因果。</p>
+        <p>· 统计实现（卡方检验、Spearman 秩相关、Cronbach's α）为前端手写，固定随机种子可复现，代码见项目仓库。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="text-align:center;font-size:12px;padding:8px 0 26px;"><a href="/" style="color:var(--accent);text-decoration:none;">← 返回作品集主页</a></footer>
+
+<div id="toast" role="status"></div>
+
+<script src="echarts.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

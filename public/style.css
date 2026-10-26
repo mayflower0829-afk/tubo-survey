@@ -1,0 +1,59 @@
+/* 乡橙调查 · TuboSurvey */
+:root {
+  --accent: #D97706; --accent-soft: #FDF3E3; --bg: #FAF7F2; --card: #fff;
+  --text: #2A2118; --muted: #8A8378; --border: #EAE3D8; --danger: #E5484D;
+  --shadow: 0 2px 10px rgba(42,33,24,.07); --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16130F; --card: #211B14; --text: #F0EAE2; --muted: #9A9083;
+    --border: #3A322A; --accent-soft: #33281A; --shadow: 0 2px 10px rgba(0,0,0,.3); }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+#appHeader { background: linear-gradient(135deg, #B4540A, #D97706); color: #fff; padding: 22px 20px 18px; border-radius: 0 0 22px 22px; }
+.brand h1 { font-size: 22px; font-weight: 800; }
+.brand .en { font-size: 13px; opacity: .75; margin-left: 6px; }
+.brand .sub { font-size: 12px; opacity: .88; display: block; margin-top: 2px; }
+
+#tabnav { position: sticky; top: 0; z-index: 20; display: flex; gap: 8px; padding: 10px 14px; background: var(--bg); overflow-x: auto; }
+#tabnav button { border: none; background: var(--card); color: var(--muted); font-size: 14px; font-weight: 600; font-family: inherit; padding: 9px 16px; border-radius: 999px; cursor: pointer; box-shadow: var(--shadow); white-space: nowrap; }
+#tabnav button.active { background: var(--accent); color: #fff; }
+
+main { max-width: 900px; margin: 0 auto; padding: 4px 14px 40px; }
+.tab { display: none; flex-direction: column; gap: 12px; }
+.tab.active { display: flex; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; overflow-x: auto; }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.card-title { font-size: 15px; font-weight: 700; }
+.hint { font-size: 12.5px; color: var(--muted); line-height: 1.8; margin-top: 6px; }
+.hint p { margin-top: 4px; }
+.figcap { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.chart { width: 100%; height: 300px; }
+.note { background: var(--accent-soft); border: 1px solid #EFD9B8; border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-top: 12px; }
+
+.kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+@media (max-width:640px) { .kpis { grid-template-columns: repeat(2,1fr); } }
+.kpi { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 10px; text-align: center; margin-top: 12px; }
+.kpi b { display: block; font-size: 22px; color: var(--accent); }
+.kpi span { font-size: 12px; font-weight: 700; } .kpi em { display: block; font-size: 11px; font-style: normal; color: var(--muted); }
+
+.filter-row { display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px; align-items: center; }
+.filter-row select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; font-size: 13px; background: var(--bg); color: var(--text); font-family: inherit; }
+select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; font-size: 13px; background: var(--bg); color: var(--text); font-family: inherit; }
+
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+.tbl th, .tbl td { border-bottom: 1px solid var(--border); padding: 7px 10px; text-align: left; }
+.tbl th { color: var(--muted); font-weight: 600; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl tr.hl td { background: var(--accent-soft); }
+
+.chi-box { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 12px; }
+@media (max-width:640px) { .chi-box { grid-template-columns: repeat(2,1fr); } }
+.chi-item { background: var(--bg); border-radius: 10px; padding: 10px 6px; text-align: center; }
+.chi-item b { display: block; font-size: 18px; color: var(--accent); font-variant-numeric: tabular-nums; }
+.chi-item span { font-size: 11px; color: var(--muted); }
+.sig { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 1px 7px; color: #fff; }
+
+#toast { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); background: rgba(42,33,24,.92); color: #fff; font-size: 13px; padding: 9px 18px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 99; }
+#toast.show { opacity: 1; }
+a { color: var(--accent); }
